@@ -1,9 +1,10 @@
 // author: Amrit Pandey, 207907
 // date: 26-04-2021
 // given a postfix expression, evaluate it using stack.
-// supported operators: * - + / %
+// supported operators: * - + / % ^ and single digit operand
 
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 #define STACK_MAX 1000
@@ -94,7 +95,8 @@ bool postfixValidChecker(string str) // postfix expression validator
             str[i] == '+' ||
             str[i] == '-' ||
             str[i] == '%' ||
-            str[i] == '/')
+            str[i] == '/' ||
+            str[i] == '^')
         {
             ctr -= 2;
             if (ctr < 0)
@@ -130,7 +132,8 @@ int evaluate(string str)
             str[i] == '+' ||
             str[i] == '-' ||
             str[i] == '%' ||
-            str[i] == '/')
+            str[i] == '/' ||
+            str[i] == '^')
         {
             switch (str[i])
             {
@@ -174,6 +177,14 @@ int evaluate(string str)
                 s.push(z);
                 break;
             }
+            case '^':
+            {
+                x = s.pop();
+                y = s.pop();
+                z = pow(y, x);
+                s.push(z);
+                break;
+            }
             }
             i++;
         }
@@ -187,9 +198,11 @@ int main()
     test case                   output
     12+34*+                     15
     473/*4-92/+                 8
+    32^5*                       45
     */
 
     string tc;
+    cout << "Enter postfix expression >> ";
     getline(cin, tc);
     cout << "result = " << evaluate(tc) << endl;
     // cout << tc;
