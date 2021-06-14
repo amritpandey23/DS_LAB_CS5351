@@ -5,6 +5,7 @@
 using namespace std;
 
 #define INT_MIN -2147483648
+#define QUEUE_MAX 100
 
 struct BTNode
 {
@@ -25,6 +26,95 @@ void printTree(struct BTNode *t)
     cout << t->data << " ";
     printTree(t->right);
   }
+}
+
+class Queue
+{
+private:
+  int front, rear;
+  BTNode *list[QUEUE_MAX];
+
+public:
+  Queue()
+  {
+    front = rear = -1;
+  }
+  BTNode *getfront();
+  bool enqueue(BTNode *);
+  BTNode *dequeue();
+  int size();
+  BTNode *peek();
+  bool isEmpty();
+  bool isFull();
+  void printlist();
+  void runwizard();
+  void clean();
+};
+
+BTNode *Queue::getfront()
+{
+  return list[front];
+}
+
+bool Queue::enqueue(BTNode *v)
+{
+  if (isFull())
+  {
+    // cout << "ERROR: overflow, queue if full." << endl;
+    return false;
+  }
+  if (isEmpty())
+  {
+    front++;
+  }
+  list[++rear] = v;
+  return true;
+}
+
+BTNode *Queue::dequeue()
+{
+  if (isEmpty())
+  {
+    // cout << "ERROR: underflow, queue is empty." << endl;
+    return NULL;
+  }
+  BTNode *res;
+  if (front == rear)
+  {
+    res = list[front];
+    front = rear = -1;
+    return res;
+  }
+  return list[front++];
+}
+
+int Queue::size()
+{
+  if (front == rear == -1)
+  {
+    return 0;
+  }
+  return rear - front + 1;
+}
+
+BTNode *Queue::peek()
+{
+  if (isEmpty())
+  {
+    cout << "ERROR: list is empty." << endl;
+    return NULL;
+  }
+  return list[rear];
+}
+
+bool Queue::isEmpty()
+{
+  return front == -1 && rear == -1;
+}
+
+bool Queue::isFull()
+{
+  return (rear == QUEUE_MAX - 1);
 }
 
 class BST
@@ -199,8 +289,24 @@ void BST::print()
     cout << "[OUT] : Tree is empty." << endl;
     return;
   }
+
+  Queue q;
+  BTNode *tmp;
+  q.enqueue(root);
   cout << "[OUT] : ";
-  printTree(root);
+  while (!q.isEmpty())
+  {
+    tmp = q.dequeue();
+    cout << tmp->data << " ";
+    if (tmp->left)
+    {
+      q.enqueue(tmp->left);
+    }
+    if (tmp->right)
+    {
+      q.enqueue(tmp->right);
+    }
+  }
   cout << endl;
 }
 
