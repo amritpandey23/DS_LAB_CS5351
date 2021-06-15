@@ -1,0 +1,65 @@
+Properties of BST:
+  1. Left child of the node contains value less than node's value,
+     Right child contains value greater than node's value.
+  2. Inorder Traversal of BST gives values in tree in sorted manner.
+  3. Total number of BST possible for N nodes = Catalan(N)
+
+
+Searching in BST:
+  while (t not equal NULL):
+    if t is less than key:
+      t = t->left
+    else if t is more than key:
+      t = t->right
+    else if t is equal to key:
+      return t
+  return t
+
+
+Searching in BST(Recursive):
+  If t is NULL:
+    return NULL
+  If t is key:
+    return t
+  If t < key:
+    search(t->left)
+  Else:
+    search(t->right)
+
+
+Inserting value in BST:
+  insert(key, t):
+   Node *r, *n;
+    r = NULL;
+
+  while( t is not NULL ):
+    r = t;
+    if t'data equal to key:
+      STOP
+    else if t'data less than key:
+      t = t->right
+    else if t'data more than key:
+      t = t->left
+
+  n = newnode
+  n->data = key
+  if r'data more than key:
+    r->left = n
+  else:
+    r->right = n
+
+
+Insertion in BST(Recursive):
+  insert(key, t):
+    if t is NULL:
+      create a new node;
+      set t to this new node;
+    
+    if key is less than t'data:
+      t = insert(key, t-left)
+    else if key is more than t'data:
+      t = insert(key, t-right)
+    else if t'data equal to key:
+      return t
+  
+    return t
