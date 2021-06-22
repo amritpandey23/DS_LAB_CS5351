@@ -1,5 +1,17 @@
 // author: Amrit Pandey, 207907
-// date: xx-xx-2021
+// date: 14-06-2021
+// Design a program to implement a Binary Search Tree (BST) with the following operation using Linked representation, on integer data
+
+// Insert a new node with the given key value
+// Delete a node with the given key value
+// Find the minimum key in the BST
+// Find the maximum key in the BST
+// Search for a given key in the BST, and return true if found, else returns false
+// Find the inorder predecessor of a node with a given key value
+// Find the inorder successor of a node with a given key value
+// Print the tree using level order traversal of the BST
+// The program should have a menu to call the above operations.
+// [The student should practice to implement trees for other data types including structures & class objects; and to support others operations on the tree/individual-nodes; and other possible ways they can be implemented/used]
 
 #include <iostream>
 using namespace std;
@@ -18,7 +30,7 @@ struct BTNode
 };
 
 int menu();
-void printTree(struct BTNode *t)
+void printTree(struct BTNode *t) // inorder traversal
 {
   if (t)
   {
@@ -282,7 +294,7 @@ struct BTNode *BST::deleteKey(struct BTNode *p, int key)
   return p;
 }
 
-void BST::print()
+void BST::print() // level order traversal
 {
   if (root == NULL)
   {
