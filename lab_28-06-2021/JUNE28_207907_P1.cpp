@@ -199,6 +199,11 @@ void wizard()
     int s, t;
     cout << "Enter the size of Hash Table: ";
     cin >> s;
+    if (s <= 0)
+    {
+        cout << "[OUT] : Invalid Size!\n";
+        return;
+    }
     HashTable ht(s);
 
     while (true)
