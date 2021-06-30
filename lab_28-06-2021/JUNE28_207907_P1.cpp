@@ -8,9 +8,9 @@ int menu()
 {
     int r;
     cout << "[1] Insert\n";
-    cout << "[2] Delete\n";
-    cout << "[3] Search\n";
-    cout << "[4] Print\n";
+    // cout << "[2] Delete\n";
+    cout << "[2] Search\n";
+    cout << "[3] Print\n";
     cout << "[0] Exit\n";
     cout << "YOUR CHOICE >>> ";
     cin >> r;
@@ -218,14 +218,14 @@ void wizard()
             ht.insertVal(t);
             break;
         }
+        // case 2:
+        // {
+        //     cout << "Enter key: ";
+        //     cin >> t;
+        //     ht.deleteVal(t);
+        //     break;
+        // }
         case 2:
-        {
-            cout << "Enter key: ";
-            cin >> t;
-            ht.deleteVal(t);
-            break;
-        }
-        case 3:
         {
             cout << "Enter key: ";
             cin >> t;
@@ -233,7 +233,7 @@ void wizard()
             ht.searchVal(t) ? cout << t << " exist.\n" : cout << t << " does not exist.\n";
             break;
         }
-        case 4:
+        case 3:
         {
             ht.printTable();
             break;
