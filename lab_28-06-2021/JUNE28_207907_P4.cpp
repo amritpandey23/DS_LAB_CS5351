@@ -1,3 +1,7 @@
+// author: Amrit Pandey, 207907
+// date: 28-06-2021
+// Implement the Breadth First Search (BFS) graph traversal algorithm.
+
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -120,16 +124,26 @@ private:
     int n;
 
 public:
-    Graph(int **mat, int start, int n)
+    Graph(int start, int n)
     {
-        this->mat = mat;
         this->start = start;
         this->n = n;
+        int tmp;
+        mat = new int*[n];
+        for (int i = 0; i < n; i++)
+        {
+            mat[i] = new int[n];
+            for (int j = 0; j < n; j++)
+            {
+                scanf("%d", &tmp);
+                mat[i][j] = tmp;
+            }
+        }
     }
 
-    Graph(int **mat, int n)
+    Graph(int n)
     {
-        Graph(mat, 0, n);
+        Graph(0, n);
     }
 
     void BFS()
@@ -137,7 +151,8 @@ public:
         int i = start;
         Queue q;
         int visited[7] = {0};
-        cout << i;
+        cout << "BFS Traversal: ";
+        cout << i << " ";
         visited[i] = 1;
         q.enqueue(i);
 
@@ -148,7 +163,7 @@ public:
             {
                 if (mat[i][j] == 1 && visited[j] == 0)
                 {
-                    cout << j;
+                    cout << j << " ";
                     visited[j] = 1;
                     q.enqueue(j);
                 }
@@ -159,15 +174,13 @@ public:
 
 int main()
 {
-    // int g_mat[][] = {
-    //     {0, 0, 0, 0, 0, 0, 0},
-    //     {0, 0, 1, 1, 0, 0, 0},
-    //     {0, 1, 0, 0, 1, 0, 0},
-    //     {0, 1, 0, 0, 1, 0, 0},
-    //     {0, 0, 1, 1, 0, 1, 1},
-    //     {0, 0, 0, 0, 1, 0, 0},
-    //     {0, 0, 0, 0, 1, 0, 0}};
-    /*
+/*
+Instructions: Just paste the entire case in the command
+line. The first line contains the number of nodes in 
+graph and the rest of the lines are used to create
+adjacency matrix.
+
+TEST CASE 1 <-- copy from below -->
 7
 0 0 0 0 0 0 0
 0 0 1 1 0 0 0
@@ -176,29 +189,20 @@ int main()
 0 0 1 1 0 1 1
 0 0 0 0 1 0 0
 0 0 0 0 1 0 0
-        */
+<--endcopy-->
 
+TEST CASE 2 <-- copy from below -->
+5
+0 0 0 0 0
+0 0 1 1 1
+0 1 0 1 0
+0 1 1 0 0
+0 1 0 0 0
+<--endcopy-->
+*/
     int n;
-    cout << "Enter nodes in graph: ";
     cin >> n;
-    int *arr[n];
-    for (int i = 0; i < n; i++)
-    {
-        int x[n];
-        for (int j = 0; j < n; j++)
-        {
-            scanf("%d", &x[j]);
-        }
-        arr[i] = x;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            cout << arr[i][j] << " ";
-        }
-    }
-    Graph g(arr, 1, n);
+    Graph g(1, n);
     g.BFS();
     return 0;
 }
